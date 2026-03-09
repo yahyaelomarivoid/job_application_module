@@ -1,0 +1,76 @@
+<div class="job-board-admin-dashboard">
+  <h2>{{ 'Submitted Job Applications'|t }}</h2>
+  
+  {% if applications is empty %}
+    <p>{{ 'No applications have been submitted yet.'|t }}</p>
+  {% else %}
+    <table class="job-board-table">
+      <thead>
+        <tr>
+          <th>{{ 'ID'|t }}</th>
+          <th>{{ 'Name'|t }}</th>
+          <th>{{ 'Email'|t }}</th>
+          <th>{{ 'Phone'|t }}</th>
+          <th>{{ 'Start Date'|t }}</th>
+          <th>{{ 'CV'|t }}</th>
+          <th>{{ 'Cover Letter'|t }}</th>
+          <th>{{ 'Actions'|t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for app in applications %}
+          <tr>
+            <td>{{ app.id }}</td>
+            <td>{{ app.name }}</td>
+            <td><a href="mailto:{{ app.email }}">{{ app.email }}</a></td>
+            <td>{{ app.phone }}</td>
+            <td>{{ app.start_date }}</td>
+            <td>
+              {% if app.cv_url != '#' %}
+                <a href="{{ app.cv_url }}" target="_blank" class="button button--small">{{ 'Download CV'|t }}</a>
+              {% else %}
+                <em>{{ 'Missing'|t }}</em>
+              {% endif %}
+            </td>
+            <td>
+              {% if app.cl_url != '#' %}
+                <a href="{{ app.cl_url }}" target="_blank" class="button button--small">{{ 'Download Letter'|t }}</a>
+              {% else %}
+                <em>{{ 'Missing'|t }}</em>
+              {% endif %}
+            </td>
+            <td>
+              {% if app.status == 'pending' %}
+                <a href="{{ path('job_board.action.accept', {'id': app.id}) }}" class="button button--primary button--small">{{ 'Accept'|t }}</a>
+                <a href="{{ path('job_board.action.reject', {'id': app.id}) }}" class="button button--danger button--small" style="background-color: #d9534f; color: white; border-color: #d43f3a;">{{ 'Reject'|t }}</a>
+              {% else %}
+                <em>{{ app.status|capitalize }}</em>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>
+
+<style>
+/* Basic styling for the admin table */
+.job-board-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.job-board-table th, .job-board-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+.job-board-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+.job-board-table tr:hover {
+  background-color: #f9f9f9;
+}
+</style>

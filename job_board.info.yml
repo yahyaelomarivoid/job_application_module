@@ -1,0 +1,8 @@
+name: "Job Board"
+type: module
+description: "Provides a Job Board, with an application block, and custom entity storage."
+package: Custom
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:block
+  - drupal:node

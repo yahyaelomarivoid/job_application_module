@@ -1,0 +1,37 @@
+job_board.admin_dashboard:
+  path: "/admin/config/content/job_board"
+  defaults:
+    _controller: '\Drupal\job_board\Controller\JobBoardAdminController::dashboard'
+    _title: "Job Board Applications"
+  requirements:
+    _permission: "administer job board"
+
+job_board.action.accept:
+  path: "/admin/config/content/job_board/accept/{id}"
+  defaults:
+    _controller: '\Drupal\job_board\Controller\JobBoardActionController::accept'
+  requirements:
+    _permission: "administer job board"
+
+job_board.action.reject:
+  path: "/admin/config/content/job_board/reject/{id}"
+  defaults:
+    _controller: '\Drupal\job_board\Controller\JobBoardActionController::reject'
+  requirements:
+    _permission: "administer job board"
+
+entity.job_application.collection:
+  path: "/admin/structure/job_applications"
+  defaults:
+    _entity_list: "job_application"
+    _title: "Job Applications"
+  requirements:
+    _permission: "view job applications"
+
+entity.job_application.canonical:
+  path: "/job_application/{job_application}"
+  defaults:
+    _entity_view: "job_application"
+    _title: "Job Application"
+  requirements:
+    _permission: "view job applications"

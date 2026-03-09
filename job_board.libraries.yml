@@ -1,0 +1,7 @@
+job_board_assets:
+  version: 1.x
+  js:
+    js/job-board-actions.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

@@ -1,0 +1,5 @@
+services:
+  job_board.service:
+    class: Drupal\job_board\Service\JobBoardService
+    arguments:
+      ["@entity_type.manager", "@logger.factory", "@plugin.manager.mail"]

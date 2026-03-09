@@ -1,0 +1,5 @@
+job_board.admin_dashboard:
+  title: "Job Board Applications"
+  description: "View and manage submitted job applications."
+  route_name: job_board.admin_dashboard
+  parent: system.admin_config_content

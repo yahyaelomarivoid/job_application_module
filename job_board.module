@@ -1,0 +1,40 @@
+<?php
+
+
+function job_board_theme($existing, $type, $theme, $path) {
+  return [
+    'job_application_block' => ['variables' => ['content' => NULL], 'template' => 'job-application-block'],
+    'job_board_admin_dashboard' => ['variables' => ['applications' => []], 'template' => 'job-board-admin-dashboard'],
+  ];
+}
+
+
+function job_board_mail($key, &$message, $params) {
+  $application = $params['application'];
+  
+  switch ($key) {
+    case 'application_received':
+      $message['subject'] = t('Thank you for your application, @name', ['@name' => $application->getApplicantName()]);
+      $message['body'][] = t('Hi @name,', ['@name' => $application->getApplicantName()]);
+      $message['body'][] = t('We have received your job application and your uploaded documents.');
+      $message['body'][] = t('Our HR team will review your profile and get back to you shortly.');
+      $message['body'][] = t('Thank you!');
+      break;
+
+    case 'application_accepted':
+      $message['subject'] = t('Application Status: Accepted');
+      $message['body'][] = t('Dear @name,', ['@name' => $application->getApplicantName()]);
+      $message['body'][] = t('Congratulations! We are pleased to inform you that your application has been accepted.');
+      $message['body'][] = t('Our HR team will reach out to you soon regarding the next steps.');
+      $message['body'][] = t('Regards, HR Team');
+      break;
+
+    case 'application_rejected':
+      $message['subject'] = t('Application Status: Update');
+      $message['body'][] = t('Dear @name,', ['@name' => $application->getApplicantName()]);
+      $message['body'][] = t('Thank you for your interest. Unfortunately, we will not be moving forward with your application at this time.');
+      $message['body'][] = t('We wish you the best in your future endeavors.');
+      $message['body'][] = t('Regards, HR Team');
+      break;
+  }
+}

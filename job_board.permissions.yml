@@ -1,0 +1,12 @@
+administer job board:
+  title: "Administer Job Board"
+  description: "Configure the Job Board module settings."
+  restrict access: true
+
+view job applications:
+  title: "View Job Applications"
+  description: "View all submitted job applications."
+
+submit job application:
+  title: "Submit Job Application"
+  description: "Allow users to submit applications via the block form."
